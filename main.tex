@@ -1,6 +1,6 @@
 % https://www.sharelatex.com/templates/cv-or-resume/professional-cv
 \documentclass[a4paper,11pt]{article}
-%\documentclass[letterpaper,11pt]{article}
+% \documentclass[letterpaper,11pt]{article}
 
 % Choose bibliography style for formatting list of publications
 \usepackage[style=ieee,url=false,doi=false,maxbibnames=99,sorting=ydnt,dashed=false]{biblatex}
@@ -18,10 +18,10 @@
 
 % Heading
 %\author{Kathryn Caruso} 
-%\def\phone{(919) 667-5773}
 %\def\city{Asheville, NC}
 \def\personalemail{caruso.k.e(at)gmail.com}
 \def\workemail{kathryncaruso(at)montana.edu}
+\def\phone{+1 (919) 667-5773}
 %\def\github{katie-caruso} % github username
 %\def\LinkedIn{carusokatie} % linkedin.com/in/______
 
@@ -37,9 +37,9 @@
     366 Barnard Hall \\
     Bozeman, MT 59717
 }{
-    Work: \href{mailto:kathryn.caruso@noaa.gov}{\workemail} \\
+    Work: \href{mailto:kathryncaruso@montana.edu}{\workemail} \\
     Personal: \href{mailto:caruso.k.e@gmail.com}{\personalemail} \\
-    US Phone: \def\phone{+1 (919) 667-5773}{\phone}
+    US Phone: {\phone}
 }
 
 \import{sections/}{header.tex}
@@ -53,9 +53,10 @@
 \import{sections/}{experience.tex}
 \import{sections/}{presentations.tex}
 \import{sections/}{projects.tex}
-\sidebyside
-    {\import{sections/}{affiliations.tex}}
-    {\import{sections/}{certifications.tex}}
+%\sidebyside
+%    {\import{sections/}{affiliations.tex}}
+%    {\import{sections/}{certifications.tex}}
+{\import{sections/}{certifications.tex}}
 \import{sections/}{service.tex}
 \import{sections/}{media.tex}
 
