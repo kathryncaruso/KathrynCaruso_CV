@@ -8,6 +8,8 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Fetch latest from Overleaf
         uses: subhamx/overleaf_sync_with_git@master
