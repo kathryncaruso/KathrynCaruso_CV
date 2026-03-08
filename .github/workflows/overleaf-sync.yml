@@ -21,16 +21,37 @@ jobs:
         with:
           path: repo/
 
-      - name: Copy and push changes
+      - name: Copy Overleaf files into repo
+        run: |
+          cp -r artifacts/* repo/
+
+      - name: Check for changes
+        id: check
         run: |
           cd repo/
-          cp -r ../artifacts/* .
+          git add .
+          if git diff --cached --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Compile LaTeX document
+        if: steps.check.outputs.changed == 'true'
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: repo/
+
+      - name: Commit and push all changes
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          cd repo/
           git config user.name "Overleaf Sync Bot"
           git config user.email "actions@github.com"
           git add .
-          if [[ $(git diff HEAD --stat) == '' ]]; then
-            echo 'No changes to commit'
-          else
-            git commit -m "Sync from Overleaf"
-            git push
-          fi
+          git commit -m "Sync from Overleaf and compile PDF"
+          git pull --rebase
+          git push
